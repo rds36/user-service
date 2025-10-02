@@ -1,0 +1,36 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: user-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/event_db
+    username: user
+    password: password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+      hibernate.jdbc.time_zone: Asia/Jakarta
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+    time-zone: Asia/Jakarta
+  profiles:
+    active: dev
+
+security:
+  jwt:
+    issuer: food-ordering
+#    hs256-secret-base64: ${JWT_HS256_SECRET_BASE64}
+    hs256-secret-base64: c2VjcmV0a2V5eXl5eXlheWF5YXlzZHNhamtkaGFzamtsZGZhc2tmZGFza2ZoZHNhamtmaGRhc2prZmRzYWtqZmFkaHNma2pkYXNobGZoZGFzamtmaHNkYWtqZmhkc2prZmFkaHNma2Roc2Fma2poZmprZHNoZmpraHNkZmtqZHNoZmtqZHNoZmprZHNoZmRqa3NoZmprZHNoZmRqa3NmaHNqa2ZoZHNqa2ZoZHNqa2Zoc2Rqa2Zoc2Rqa2ZoZHNqa2ZoZHNqa2Y=
+    expiration: 3600
+
+pii:
+  aes:
+#    key-base64: ${AES_KEY_BASE64}
+    key-base64: c2VjcmV0eXl5eXl5eXl5dA==
