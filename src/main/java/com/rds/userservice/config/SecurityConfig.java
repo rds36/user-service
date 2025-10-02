@@ -1,4 +1,4 @@
-package com.rds.securitylib.config;
+package com.rds.userservice.config;
 
 import com.rds.securitylib.filter.JwtAuthFilter;
 import com.rds.securitylib.jwt.JwtService;
@@ -33,13 +33,20 @@ public class SecurityConfig {
         log.info("SecurityFilterChain: initialized");
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**","/api/hello", "/actuator/health").permitAll()
-                        .anyRequest().authenticated()
+                .sessionManagement(sm ->
+                        sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+                .authorizeHttpRequests(auth ->
+                        auth
+                            .requestMatchers("/api/auth/**", "/actuator/health").permitAll()
+                            .anyRequest()
+                            .authenticated()
                 )
                 .formLogin(AbstractHttpConfigurer::disable)
-                .addFilterBefore(new JwtAuthFilter(jwtService, Set.of("/api/auth", "/actuator")), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(
+                        new JwtAuthFilter(jwtService, Set.of("/api/auth", "/actuator")),
+                        UsernamePasswordAuthenticationFilter.class
+                )
                 .build();
     }
 }

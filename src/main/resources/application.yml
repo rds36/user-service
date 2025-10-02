@@ -1,1 +1,19 @@
-spring.application.name=user-service
+server:
+  port: 8081
+
+spring:
+  application:
+    name: user-service
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+      hibernate.jdbc.time_zone: Asia/Jakarta
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+    time-zone: Asia/Jakarta
+  profiles:
+    active: dev
